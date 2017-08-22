@@ -9,7 +9,7 @@ security:
   oauth2:
     resource:
       userInfoUri: http://localhost:10002/user
-      filter-order: 0
+      #filter-order: 0
       #preferTokenInfo: false
 
 #management.security.enabled: false
