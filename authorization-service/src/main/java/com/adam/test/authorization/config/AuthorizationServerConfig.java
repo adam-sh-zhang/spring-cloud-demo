@@ -1,7 +1,9 @@
 package com.adam.test.authorization.config;
 
+import ch.qos.logback.core.rolling.helper.TokenConverter;
 import com.adam.test.authorization.service.MongoClientDetailsService;
 import com.adam.test.authorization.service.MongoUserDetailsService;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,8 +25,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +59,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return manager;
     }
 
-    private TokenStore tokenStore = new InMemoryTokenStore();
+    //use jwt
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+//        jwtAccessTokenConverter.setSigningKey("111111");
+//        return new JwtAccessTokenConverter();
+//    }
+//    @Autowired
+//    private AccessTokenConverter jwtAccessTokenConverter;
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -78,7 +91,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .tokenStore(tokenStore)
+                //.accessTokenConverter(jwtAccessTokenConverter)
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET);
