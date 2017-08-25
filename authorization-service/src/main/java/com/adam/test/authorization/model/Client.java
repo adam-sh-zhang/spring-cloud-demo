@@ -12,77 +12,20 @@ import java.util.Set;
 /**
  * Created by Adam.Zhang on 2017/8/22.
  */
-public class Client implements ClientDetails {
+public class Client extends BaseModel implements ClientDetails {
 
-    @Id
-    private String id;
-    private String clientId;
-    private String clientSecret;
-    private boolean isSecretRequired;
-    private Set<String> resourceIds;
-    private boolean isScoped;
-    private Set<String> scope;
-    private Set<String> authorizedGrantTypes;
-    private Integer accessTokenValiditySeconds;
-    private Integer refreshTokenValiditySeconds;
-    private Set<String> registeredRedirectUri;
-    private Collection<GrantedAuthority> authorities;
-    private Map<String, Object> additionalInformation;
-
-
-    //setter methods
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    public void setSecretRequired(boolean secretRequired) {
-        isSecretRequired = secretRequired;
-    }
-
-    public void setResourceIds(Set<String> resourceIds) {
-        this.resourceIds = resourceIds;
-    }
-
-    public void setScoped(boolean scoped) {
-        isScoped = scoped;
-    }
-
-    public void setScope(Set<String> scope) {
-        this.scope = scope;
-    }
-
-    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
-        this.authorizedGrantTypes = authorizedGrantTypes;
-    }
-
-    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
-    }
-
-    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
-    }
-
-    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
-        this.registeredRedirectUri = registeredRedirectUri;
-    }
-
-    public void setAuthorities(Collection<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setAdditionalInformation(Map<String, Object> additionalInformation) {
-        this.additionalInformation = additionalInformation;
-    }
-    //setter methods end
+    public String clientId;
+    public String clientSecret;
+    public boolean isSecretRequired;
+    public Set<String> resourceIds;
+    public boolean isScoped;
+    public Set<String> scope;
+    public Set<String> authorizedGrantTypes;
+    public Integer accessTokenValiditySeconds;
+    public Integer refreshTokenValiditySeconds;
+    public Set<String> registeredRedirectUri;
+    public Collection<GrantedAuthority> authorities;
+    public Map<String, Object> additionalInformation;
 
 
     @Override

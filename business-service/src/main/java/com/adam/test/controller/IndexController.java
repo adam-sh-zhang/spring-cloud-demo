@@ -19,10 +19,12 @@ public class IndexController {
 
 
     @RequestMapping("/index")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     //About method security, see here: http://docs.spring.io/spring-security/site/docs/4.2.3.RELEASE/reference/htmlsingle/#el-access
-    public String index() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return user.getUsername();
+    public User index() {
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //return user.getUsername();
+        return user;
     }
 }

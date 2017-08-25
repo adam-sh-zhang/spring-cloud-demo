@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Adam.Zhang on 2017/8/22.
  */
-public class MongoClientDetailsService implements ClientDetailsService {
+@Service
+public class ClientService implements ClientDetailsService {
 
     @Autowired
     ClientRepository clientRepository;

@@ -1,49 +1,53 @@
 package com.adam.test.authorization.model;
 
-import org.springframework.data.annotation.Id;
+import com.adam.test.authorization.service.RoleService;
+import com.adam.test.authorization.util.ApplicationUtil;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.ContextLoader;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Adam.Zhang on 2017/6/6.
  */
-public class User implements UserDetails {
+@Document
+public class User extends BaseModel implements UserDetails {
 
-    @Id
-    private String id;
-    private String username;
-    private String password;
-    private List<String> roles;
+    Role roleEntity;
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public String username;
+    public String password;
+    public String roleId;
+    public boolean isEnabled;
+
+
+    private Role getRole() {
+        if (roleEntity == null) {
+            RoleService roleService = ApplicationUtil.getBean(RoleService.class);
+            roleEntity = roleService.getRoleById(this.roleId);
+            if (roleEntity == null) {
+                throw new RuntimeException("invalid role");
+            }
+        }
+        return roleEntity;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public String getRoleName() {
+        return getRole().name;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
-        if (this.roles != null && !this.roles.isEmpty()) {
-            this.roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role)));
+        Role role = getRole();
+        if (role != null && role.authorities != null) {
+            return role.authorities;
         }
-        return grantedAuthorities;
+        return null;
     }
 
     @Override
@@ -73,6 +77,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isEnabled;
     }
 }

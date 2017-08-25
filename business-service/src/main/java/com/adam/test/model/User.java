@@ -11,66 +11,9 @@ import java.util.List;
 /**
  * Created by Adam.Zhang on 2017/8/24.
  */
-public class User implements UserDetails {
-
-    private String id;
-    private String username;
-    private String password;
-    private List<String> roles;
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
-    public void setUsername(String userName) {
-        this.username = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
-        if (this.roles != null && !this.roles.isEmpty()) {
-            this.roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role)));
-        }
-        return grantedAuthorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+public class User extends BaseModel {
+    public String username;
+    public boolean isEnabled;
+    public String roleName;
+    public List<String> authorities;
 }
