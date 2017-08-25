@@ -22,6 +22,7 @@
         <module>business-service</module>
         <module>admin-service</module>
         <module>authorization-service</module>
+        <module>business-service-2</module>
     </modules>
 
     <parent>

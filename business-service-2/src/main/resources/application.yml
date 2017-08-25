@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: business2
+
+server:
+  port: 0
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:10002/user
