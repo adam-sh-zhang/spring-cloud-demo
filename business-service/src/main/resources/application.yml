@@ -8,7 +8,7 @@ spring:
 security:
   oauth2:
     resource:
-      userInfoUri: http://localhost:10002/user
+      userInfoUri: http://localhost/authorization/user
       #filter-order: 0
       #preferTokenInfo: false
 
