@@ -9,6 +9,8 @@ spring:
       server:
         native:
           searchLocations: classpath:/configs
+        git:
+          uri: http://....git
   profiles:
     active: native
 
