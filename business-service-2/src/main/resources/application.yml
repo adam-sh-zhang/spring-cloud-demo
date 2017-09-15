@@ -1,11 +1,22 @@
 spring:
   application:
     name: business2
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
 
 server:
-  port: 0
+  port: 10003
 
 security:
   oauth2:
     resource:
       userInfoUri: http://localhost:10002/user
+  user:
+    password: abc123_
+
+#mybatis configs
+mybatis:
+  config-location: classpath:mybatis-config.xml
