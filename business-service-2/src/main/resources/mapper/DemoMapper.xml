@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adam.test.business2.mapper.DemoMapper">
+    <select id="findAll" resultType="Demo">
+        select * from demo
+    </select>
+
+    <insert id="insertDemo">
+        insert into demo (id,value)
+        values (#{id},#{value})
+    </insert>
+    <cache/>
+</mapper>

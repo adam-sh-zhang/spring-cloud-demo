@@ -1,0 +1,22 @@
+server.port: 10001
+
+logging:
+  level.: DEBUG
+
+spring:
+  application:
+    name: admin
+  aop:
+    proxy-target-class: true
+
+security:
+    oauth2:
+        client:
+            clientId: admin-service
+            clientSecret: password
+            accessTokenUri: http://192.168.119.55:10002/oauth/token
+            #userAuthorizationUri: http://192.168.119.55:10002/oauth/authorize
+            grant-type: client_credentials
+            scope: server
+        resource:
+          userInfoUri: http://localhost:10002/user
